@@ -2,7 +2,7 @@
 
 ![Palette Extractor](palette_demo_example.jpg?raw=true)
 
-# See the [demo](http://htmlpreview.github.io/?https://github.com/googleartsculture/art-palette/blob/master/palette-extraction/index.html)
+### See the [demo](http://htmlpreview.github.io/?https://github.com/googleartsculture/art-palette/blob/master/palette-extraction/index.html)
 
 The javascript palette extractor returns the palette calculated for an [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData).
 
