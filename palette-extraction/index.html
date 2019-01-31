@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Art Palette</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400">
+  <style>
+    body {
+      background-color: #e6e1d4;
+      color: #ac3a3a;
+      font-family: Roboto, sans-serif;
+      margin: 20px;
+    }
+
+    .palette {
+      width: 400px;
+      height: 50px;
+      padding: 0;
+    }
+
+    .palette li {
+      display: block;
+      float: left;
+      width: 20%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Colors Palette Extractor</h1>
+  <input type="file" id="image-input">
+  <ul class="palette"></ul>
+
+  <script src="palette_extractor.min.js"></script>
+  <script type="text/javascript">
+
+    const PALETTE_COLORS_COUNT = 5;
+    const IMAGE_MAX_WIDTH = 400;
+
+    const paletteElement = document.querySelector(".palette");
+    const paletteElements =  [];
+    let i = 0;
+    while (i < PALETTE_COLORS_COUNT) {
+      const li = document.createElement('li');
+      paletteElement.appendChild(li);
+      paletteElements.push(li);
+      i++;
+    }
+
+    const canvas = document.createElement('canvas');
+    const canvasContext = canvas.getContext('2d');
+    document.body.appendChild(canvas);
+
+    const imageInput = document.getElementById("image-input");
+
+    const paletteExtractor = new PaletteExtractor();
+
+    let inputFileReader = null;
+    let image = null;
+
+    imageInput.addEventListener("change", (event) => {
+      const input = /** @type {!Element} */ (event.target);
+      readInputFile(
+          input,
+          (dataUrl) => {
+            image = new Image();
+            image.onload = () => {
+              if (image.width < 1 || image.height < 1) {
+                return [];
+              }
+
+              const drawableRatio = image.width / image.height;
+              image.width = Math.min(IMAGE_MAX_WIDTH, image.width);
+              image.height = parseInt(image.width / drawableRatio, 10);
+              canvas.width = image.width;
+              canvas.height = image.height;
+              canvasContext.drawImage(image, 0, 0, image.width, image.height);
+
+              const data =
+                  canvasContext.getImageData(0, 0, image.width, image.height)
+                      .data;
+              // Extracts the colors palette from image data.
+              const hexPalette =
+                  paletteExtractor.processImageData(data, PALETTE_COLORS_COUNT);
+
+              let index = 0;
+              for(const paletteColorElem of paletteElements){
+                paletteColorElem.style.backgroundColor = hexPalette[index];
+                index++;
+              }
+            };
+            image.src = dataUrl;
+          },
+          (error) => {
+            console.log(error);
+          });
+      // To allow uploading the same image twice.
+      input.value = null;
+    });
+
+    /**
+      * Loads input files.
+      * @param {!Element} inputNode
+      * @param {!Function} callbackSuccess
+      * @param {!Function} callbackError
+      */
+    const readInputFile = function(inputNode, callbackSuccess, callbackError) {
+      if (inputFileReader) {
+        inputFileReader.onload = null;
+        inputFileReader.onerror = null;
+        inputFileReader.abort();
+        inputFileReader = null;
+      }
+      if (inputNode.files && inputNode.files[0]) {
+        inputFileReader = new FileReader();
+        inputFileReader.onload = function(event) {
+          callbackSuccess(event.target.result);
+        };
+        inputFileReader.onerror = callbackError;
+        inputFileReader.readAsDataURL(inputNode.files[0]);
+      }
+    };
+  </script>
+</body>
+</html>
