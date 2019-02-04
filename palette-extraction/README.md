@@ -2,6 +2,8 @@
 
 [![Palette Extractor](palette_demo_example.jpg?raw=true)](https://htmlpreview.github.io/?https://github.com/googleartsculture/art-palette/blob/master/palette-extraction/index.html)
 
+<sub><sup>image credit: [The Met](https://www.metmuseum.org/art/collection/search/437397)</sup></sub>
+
 ### See the [demo](https://htmlpreview.github.io/?https://github.com/googleartsculture/art-palette/blob/master/palette-extraction/index.html)
 
 The javascript palette extractor returns the palette calculated for an [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData).
