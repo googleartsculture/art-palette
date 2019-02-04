@@ -15,11 +15,11 @@ The source code is separate in two parts :
 1. The frontend Javascript code used to extract the color palette from an image.
 2. The backend Python code used to find the nearest palettes matching a given one with the palette embedding TensorFlow model.
 
-## Palette Extraction (frontend)
+## [Palette Extraction (frontend)](palette-extraction)
 
 Javascript palette extractor that returns the palette calculated for an [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData).
 
-## Palette Embedding (backend)
+## [Palette Embedding (backend)](palette-embedding)
 
 Machine learning model that returns an embedding of color palettes in an Euclidean space that preserves perceptual distance. This embedding enables efficient nearest-neighbor search.
 
