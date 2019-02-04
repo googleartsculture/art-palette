@@ -4,7 +4,7 @@
 ways for users to interact with art collections. With [Art Palette](https://artsexperiments.withgoogle.com/artpalette/), you can
 search for artworks that match a color combination of your choice.
 
-[![Art Palette](palette_example.jpg?raw=true)](https://artsexperiments.withgoogle.com/artpalette/)
+[![Art Palette](palette_example.jpg?raw=true)](https://artsexperiments.withgoogle.com/artpalette/colors/b38856-d16f58-e6ceb1-65615b-cdb184)
 
 # Develop
 
