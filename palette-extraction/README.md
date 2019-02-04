@@ -1,6 +1,6 @@
 # Palette Extractor
 
-![Palette Extractor](palette_demo_example.jpg?raw=true)
+[![Palette Extractor](palette_demo_example.jpg?raw=true)](https://htmlpreview.github.io/?https://github.com/googleartsculture/art-palette/blob/master/palette-extraction/index.html)
 
 ### See the [demo](https://htmlpreview.github.io/?https://github.com/googleartsculture/art-palette/blob/master/palette-extraction/index.html)
 
